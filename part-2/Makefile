@@ -1,38 +1,19 @@
-# Compiler settings
+# Compiler
 CXX = g++
-CXXFLAGS = -g -Wall -Wextra -std=c++11
 
-# File names
-TARGET = banking-system
-SOURCES = main.cpp bank.cpp
-HEADERS = types.h
-OBJECTS = $(SOURCES:.cpp=.o)
+# Compiler flags
+CXXFLAGS = -std=c++17 -g
 
-# Default target
-all: $(TARGET)
+# Source files
+SRC = main.cpp bank.cpp
 
-# Build target
-$(TARGET): $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $(TARGET)
+# Executable name
+EXEC = banking-system
 
-# Pattern rule for object files
-%.o: %.cpp $(HEADERS)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+# Rule to build the executable (no intermediate .o files)
+$(EXEC): $(SRC)
+	$(CXX) $(CXXFLAGS) $(SRC) -o $(EXEC)
 
-# Clean build files
+# Clean up the executable
 clean:
-	rm -f $(TARGET) $(OBJECTS) core
-
-# Run the program
-run: $(TARGET)
-	./$(TARGET)
-
-# Debug with GDB
-debug: $(TARGET)
-	gdb ./$(TARGET)
-
-# Log a debug section
-debug-log:
-	script -c "pwd; bash" -B part2.log
-
-.PHONY: all clean run debug
+	rm -f $(EXEC)
