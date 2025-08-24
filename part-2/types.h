@@ -37,6 +37,19 @@ public:
         transactionCount = 0;
         // Task 1: Missing transactions array initialization
     }
+
+    Account& operator=(const Account& other) {
+        if (this != &other) {
+            delete[] transactions; 
+            
+            id = other.id;
+            balance = other.balance;
+            active = other.active;
+            transactionCount = other.transactionCount;
+            // Task 1: Missing transactions array initialization
+        }
+        return *this;
+    }
     
     bool addTransaction(double amount, const char* desc) {
         // Task 3: Buffer overflow potential
@@ -52,29 +65,6 @@ public:
 
     ~Account() {
         // Task 4: Memory leak - no deallocation
-    }
-
-    Account(const Account& other) {
-        id = other.id;
-        balance = other.balance;
-        active = other.active;
-        transactionCount = other.transactionCount;
-        // Task 1: Missing transactions array initialization
-        transactions = nullptr;
-    }
-
-    Account& operator=(const Account& other) {
-        if (this != &other) {
-            delete[] transactions; 
-            
-            id = other.id;
-            balance = other.balance;
-            active = other.active;
-            transactionCount = other.transactionCount;
-            // Task 1: Missing transactions array initialization
-            transactions = nullptr;
-        }
-        return *this;
     }
 };
 
