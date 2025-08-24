@@ -17,6 +17,3 @@ $(EXEC): $(SRC)
 # Clean up the executable
 clean:
 	rm -f $(EXEC)
-# Log a debug section
-debug-log:
-	script -c "pwd; bash" -B part1.log
